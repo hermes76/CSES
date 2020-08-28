@@ -1,35 +1,23 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
-
 int main()
 {
     int n,m;
+    multiset<int,greater<int>>arr;
+    multiset<int,greater<int>>::iterator it;
     cin>>n>>m;
-     vector <int> arr;
-    int arr2[m];
+    int parr[m];
     int a;
-    for(int x =0; x<n; x++)
-    {
-        cin>>a;
-        arr.push_back(a);
-    }
+    for(int x =0; x<n; x++){cin>>a; arr.insert(a);}
+    for(int y =0; y<m; y++){cin>>parr[y];}
     for(int x =0; x<m; x++)
     {
-        cin>>arr2[x];
-    }
-    sort(arr.begin(),arr.end());
-    vector <int>::iterator indice;
-    for(int x =0; x<m; x++)
-    {
-        indice=lower_bound(arr.begin(),arr.end(),arr[x]);
-        if(arr[indice-arr.begin()]<=arr[x])
+        it=arr.lower_bound(parr[x]);
+        if(it!=arr.end())
         {
-            cout<<arr[indice-arr.begin()]<<" ";
-            arr.erase(arr.begin()+*indice);
-        }else{
-            cout<<"-1 ";
-        }
+            arr.erase(it);
+            cout<<*it<<endl;
+        }else
+        cout<<-1<<endl;
     }
 }
