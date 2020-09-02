@@ -1,42 +1,42 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 using namespace std;
-struct dat
+
+struct pos
 {
     int a,b;
 };
-bool comp(dat a, dat b)
+bool comp(pos a, pos b)
 {
-    if(a.b-a.a==b.b-b.a)
-    {
-        return a.a<b.a;
-    }
-    return a.b-a.a<b.b-b.a;
+    return a.a<b.a;
 }
-vector <dat> vect;
 int main()
 {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     int n;
+    pos greedy;
     cin>>n;
-    dat arr[n];
-    for(int x=0; x<n; x++)
-    {
-        cin>>arr[x].a;
-        cin>>arr[x].b;
-    }
+    pos arr[n];
+    for(int x =0; x<n; x++) cin>>arr[x].a>>arr[x].b;
     sort(arr,arr+n,comp);
-    int indice=0;
-    int cuenta=0;
-    vector <day>::iterator it;
-    for(int x =0; x<n; x++)
+    int res=1;
+    greedy=arr[0];
+    for(int x=1; x<n; x++)
     {
-        for(it=vect.begin(); it!=vect.end(); it++)
+        if(greedy.b<=arr[x].a)
         {
-            if(*it.a
+            greedy=arr[x];
+            res++;
         }
+        else{
+            if(arr[x].a>=greedy.a && arr[x].a<greedy.b && arr[x].b<=greedy.b)
+            {
+                greedy=arr[x];
+            }
+        }
+
     }
-    cout<<cuenta;
+    cout<<res;
+
 }
